@@ -1,0 +1,5 @@
+venkat_exercise_styles: #library name
+  version: 1.x
+  css:
+    theme:
+      css/venkat_exercise_styles.css: {}   #we are adding css file in libraries so it can be accessed wherever we want.

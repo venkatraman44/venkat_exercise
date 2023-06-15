@@ -1,0 +1,41 @@
+venkat_exercise.hello_world: #route name for controller
+  path: '/HI-FRIENDS' #path
+  defaults:
+    _controller: '\Drupal\venkat_exercise\Controller\CustomController::hello' #class and function
+    _title: 'HI FRIENDS' #title
+  requirements:
+    _permission: 'access content' #defining permissions needed
+
+venkat_exercise.custom_form: #route name  for custom form page
+  path: "/get-details" #path
+  defaults:
+    _form: '\Drupal\venkat_exercise\Form\CustomForm' #class and function
+    _title: "Custom Form to get user details" #title
+  requirements:
+    _permission: 'access content' #permission
+
+venkat_exercise.configform: #route name for config form
+  path: '/config-form' #path
+  defaults:
+    _form: '\Drupal\venkat_exercise\Form\ConfigForm' #class and function
+    _title: 'Custom Configuration Form' #title
+  requirements:
+    _permission: 'venkat exercise config form permission' #permission
+  options:
+    _admin_route: true #admin theme
+
+venkat_exercise.dependent_drop: #route name  for custom form page
+  path: "/drop" #path
+  defaults:
+    _form: '\Drupal\venkat_exercise\Form\DependentDrop' #class and function
+    _title: "dropdown" #title
+  requirements:
+    _permission: 'access content' #permission
+
+venkat_exercise.dependent_form: #route name
+  path: '/dropdown-form' #path
+  defaults:
+    _form: '\Drupal\venkat_exercise\Form\DropdownForm' #class and function
+    _title: 'dropdownform' #title
+  requirements:
+    _permission: 'access content' #permission

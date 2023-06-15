@@ -1,0 +1,4 @@
+#creating new permission
+venkat exercise config form permission:   #machine name of the permission
+  title: config form Page permission #title of the permission
+  description: description  #description of the permission

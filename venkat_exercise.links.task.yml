@@ -1,0 +1,21 @@
+#to create tabs
+venkat_exercise.custom_form: #machine name
+  route_name: venkat_exercise.custom_form #where the tab should lead to
+  title : custom form #title of the tab
+  base_route: venkat_exercise.hello_world #where the tab should appear
+  weight: 10
+
+
+
+venkat_form.configform: #machine name
+  route_name: venkat_exercise.configform #where the tab should lead to
+  title : config form #title of the tab
+  base_route: venkat_exercise.hello_world #where the tab should appear
+  weight: 11
+
+
+venkat_exercise.hello_world: #machine name
+  route_name: venkat_exercise.hello_world #where the tab should lead to
+  title : controller #title of the tab
+  base_route: venkat_exercise.hello_world #where the tab should appea
+  weight: 12

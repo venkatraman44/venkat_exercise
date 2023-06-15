@@ -1,0 +1,5 @@
+system.admin.view:
+  title: HELLO #menu title
+  route_name: venkat_exercise.hello_world  #where the menu should take us to
+  parent: system.admin #parent menu
+  menu_name: XXX #menu name

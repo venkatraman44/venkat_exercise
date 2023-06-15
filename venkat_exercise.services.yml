@@ -1,0 +1,16 @@
+services:
+  custom_service:   #our service
+    class : Drupal\venkat_exercise\CustomService #define class and where it is present
+    arguments: ['@config.factory']  #arguments
+
+  events_subscriber: #creating a eventsubscriber
+    class: '\Drupal\venkat_exercise\EventSubscriber\EventSubscriberDemo' #where the file is present
+    tags:
+      - { name: 'event_subscriber' } # to use event subscriber
+    arguments: ['@messenger']
+
+  venkat_exercise.commands:  #creating a drush command
+    class: \Drupal\venkat_exercise\Commands\DrushCommandsDemo #where the file is present
+    arguments: ['@entity_type.manager']  #including the argumenet
+    tags:
+      - { name: drush.command }

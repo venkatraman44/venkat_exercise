@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * File.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function venkat_exercise_theme($existing, $type, $theme, $path) {
+  // Initializing theme, template and the variables.
+  return [
+    'new_template' => [
+      'variables' => [
+        'markup' => "",
+        'hexcode' => "",
+      ],
+    ],
+  ];
+
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function venkat_exercise_user_login($account) {
+  // Instantiate our event.
+  $event = new UserLoginEvent($account);
+
+  // Get the event_dispatcher service and dispatch the event.
+  $event_dispatcher = \Drupal::service('event_dispatcher');
+  $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function venkat_exercise_page_attachments_alter(array &$attachments) {
+  // Calling the service.
+  $route_match = \Drupal::routeMatch();
+  // Getting the route name of the particular page.
+  $route_name = $route_match->getRouteName();
+  // If the route name matches.
+  if ($route_name === 'comment.admin') {
+    // Apply the css.
+    $attachments['#attached']['library'][] = 'venkat_exercise/venkat_exercise_styles';
+  }
+  // If the route name matches.
+  elseif ($route_name === 'entity.node.canonical') {
+    // Apply the css.
+    $attachments['#attached']['library'][] = 'venkat_exercise/venkat_exercise_styles';
+  }
+}
