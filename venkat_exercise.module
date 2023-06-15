@@ -5,6 +5,8 @@
  * File.
  */
 
+use Drupal\venkat_exercise\Event\UserLoginEvent;
+
 /**
  * Implements hook_theme().
  */
@@ -27,8 +29,7 @@ function venkat_exercise_theme($existing, $type, $theme, $path) {
 function venkat_exercise_user_login($account) {
   // Instantiate our event.
   $event = new UserLoginEvent($account);
-
-  // Get the event_dispatcher service and dispatch the event.
+  // Triggering the event_dispatcher service and dispatch the event.
   $event_dispatcher = \Drupal::service('event_dispatcher');
   $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
 }

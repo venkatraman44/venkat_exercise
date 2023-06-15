@@ -14,3 +14,9 @@ services:
     arguments: ['@entity_type.manager']  #including the argumenet
     tags:
       - { name: drush.command }
+
+  venkat_exercise_user_login:
+    class: '\Drupal\venkat_exercise\EventSubscriber\UserLoginSubs'
+    tags:
+      - { name: 'event_subscriber' }
+    arguments: ['@database','@date.formatter','@messenger']
