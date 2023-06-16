@@ -1,8 +1,8 @@
 <?php
 
 namespace Drupal\venkat_exercise\Form;
-// namespace.
 
+// namespace.
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Database\Database;
@@ -68,6 +68,10 @@ class DropdownForm extends FormBase {
       '#suffix' => '</div>',
       '#empty_option' => $this->t('- Select -'),
       '#disabled' => FALSE,
+    ];
+    $form['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Submit'),
     ];
 
     return $form;

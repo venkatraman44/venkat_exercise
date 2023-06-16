@@ -10,7 +10,7 @@ use Drupal\Core\Config\ConfigCrudEvent;
 use Drupal\Core\Messenger\MessengerInterface;
 
 /**
- * some comment.
+ * Some comment.
  */
 class EventSubscriberDemo implements EventSubscriberInterface {
   /**
@@ -34,7 +34,7 @@ class EventSubscriberDemo implements EventSubscriberInterface {
    *   some description.
    */
   public static function getSubscribedEvents() {
-    // to get sudscribed events.
+    // To get sudscribed events.
     // configs are returns when a new config is saved.
     $events[ConfigEvents::SAVE][] = ['configSave', -100];
     // Returns the configuration when it is deleted.
@@ -43,7 +43,7 @@ class EventSubscriberDemo implements EventSubscriberInterface {
   }
 
   /**
-   *  some comment.
+   * Some comment.
    */
   public function configSave(ConfigCrudEvent $event) {
     // Funtion for configSave.

@@ -40,3 +40,16 @@ venkat_exercise.dependent_form: #route name
   requirements:
     _permission: 'access content' #permission
 
+venkat_exercise.controllertask:
+  path: 'node/{node}/title'
+  defaults:
+    _controller: '\Drupal\venkat_exercise\Controller\ControllerTask::nodeTitle'
+    _title_callback: '\Drupal\venkat_exercise\Controller\ControllerTask::titleCallback'
+  options:
+    _admin_route: true
+    parameters:
+      node:
+        type: entity:node
+  requirements:
+    _custom_access: '\Drupal\venkat_exercise\Controller\ControllerTask::cloneNode'
+    _permission: 'controller permission'
