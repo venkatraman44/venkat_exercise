@@ -2,7 +2,7 @@
 
 namespace Drupal\venkat_exercise\Plugin\Field\FieldType;
 
-// Namespace for FieldType.
+// Namespace.
 // Used as baseclass.
 use Drupal\Core\Field\FieldItemBase;
 // Interface is used for storage.

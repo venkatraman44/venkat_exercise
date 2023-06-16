@@ -4,7 +4,7 @@ namespace Drupal\venkat_exercise\EventSubscriber;
 
 // To use the custom Event created.
 use Drupal\venkat_exercise\Event\UserLoginEvent;
-// Used as base class.
+// all base classes
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DateFormatterInterface;
@@ -64,22 +64,22 @@ class UserLoginSubs implements EventSubscriberInterface {
   }
 
   /**
-   * Subscribe to the user login event dispatched.
+   *  user login event dispatched.
    *
    * @param \Drupal\venkat_exercise\Event\UserLoginEvent $event
    *   Our custom general object.
    */
   public function onUserLogin(UserLoginEvent $event) {
-    // Selecting the table from db.
+    // Selecting the table.
     $account_created = $this->database->select('users_field_data', 'ud')
-      // Returns when the account was created.
+      // to return when the account was created.
       ->fields('ud', ['created'])
-      // Returns the userid.
+      // to return the userid.
       ->condition('ud.uid', $event->account->id())
       ->execute()
       ->fetchField();
 
-    // Using message service to get message whenever user logs in.
+    // gives message whenever a user logs in.
     $this->messenger->addStatus(t('Welcome to the site, your account was created on %created_date.', [
       '%created_date' => $this->dateFormatter->format($account_created, 'long'),
     ]));

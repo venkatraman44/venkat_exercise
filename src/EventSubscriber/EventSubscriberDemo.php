@@ -2,7 +2,7 @@
 
 namespace Drupal\venkat_exercise\EventSubscriber;
 
-// Used as baseclass for EventSubcriberDemo.
+// baseclass.
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 // Defines event for the configuration system.
 use Drupal\Core\Config\ConfigEvents;
@@ -10,7 +10,7 @@ use Drupal\Core\Config\ConfigCrudEvent;
 use Drupal\Core\Messenger\MessengerInterface;
 
 /**
- * Description for class.
+ * some comment.
  */
 class EventSubscriberDemo implements EventSubscriberInterface {
   /**
@@ -21,7 +21,7 @@ class EventSubscriberDemo implements EventSubscriberInterface {
   protected $messenger;
 
   /**
-   * Function.
+   * Function for construct.
    */
   public function __construct(MessengerInterface $messenger) {
     $this->messenger = $messenger;
@@ -31,11 +31,11 @@ class EventSubscriberDemo implements EventSubscriberInterface {
    * {@inheritdoc}
    *
    * @return array
-   *   DESCRIPTION
+   *   some description.
    */
   public static function getSubscribedEvents() {
-    // This function is mandatory for eventsubcriber.
-    // Returns the configuration when it saved.
+    // to get sudscribed events.
+    // configs are returns when a new config is saved.
     $events[ConfigEvents::SAVE][] = ['configSave', -100];
     // Returns the configuration when it is deleted.
     $events[ConfigEvents::DELETE][] = ['configDelete', 100];
@@ -43,7 +43,7 @@ class EventSubscriberDemo implements EventSubscriberInterface {
   }
 
   /**
-   * Description.
+   *  some comment.
    */
   public function configSave(ConfigCrudEvent $event) {
     // Funtion for configSave.

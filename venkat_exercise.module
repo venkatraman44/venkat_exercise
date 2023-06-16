@@ -53,3 +53,52 @@ function venkat_exercise_page_attachments_alter(array &$attachments) {
     $attachments['#attached']['library'][] = 'venkat_exercise/venkat_exercise_styles';
   }
 }
+/**
+ * Implements hook_mail().
+ */
+function venkat_exercise_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+
+  switch ($key) {
+    case 'create_page':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Page created: @title', array('@title' => $params['node_title']), $options);
+      $message['body'][] = $params['message'];
+      break;
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function venkat_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if ($entity->getEntityTypeId() !== 'node' || ($entity->getEntityTypeId() === 'node' && $entity->bundle() !== 'page')) {
+    return;
+  }
+
+  $mailManager = \Drupal::service('plugin.manager.mail');
+
+  $module = 'venkat_exercise';
+  $key = 'create_page';
+  $to = \Drupal::currentUser()->getEmail();
+  $params['message'] = $entity->get('body')->value;
+  $params['node_title'] = $entity->label();
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] !== true) {
+
+    \Drupal::messenger()->addMessage(t('There was a problem sending your message and it was not sent'),'error');
+    //drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+  }
+  else {
+
+    \Drupal::messenger()->addMessage(t('There was a problem sending your message and it was not sent'),'status');
+   // drupal_set_message(t('Your message has been sent.'));
+  }
+
+}
