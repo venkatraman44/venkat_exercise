@@ -4,7 +4,7 @@ venkat exercise config form permission:   #machine name of the permission
   description: description  #description of the permission
 
 controller permission:
-  title: 'Quick Node Clone Settings'
-  description: 'Administer Quick Node Clone Settings'
+  title: 'Controller Task permission'
+  description: 'Administer Controller task settings Settings'
 permission_callbacks:
   - \Drupal\venkat_exercise\DynamicPermission::dynamicPermissions

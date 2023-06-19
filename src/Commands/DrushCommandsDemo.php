@@ -24,6 +24,11 @@ class DrushCommandsDemo extends DrushCommands {
     $this->entityManager = $entityTypeManager;
     parent::__construct();
   }
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity_type.manager')
+    );
+  }
 
   /**
    * Command that returns a list of all blocked users.
@@ -43,7 +48,7 @@ class DrushCommandsDemo extends DrushCommands {
    *   This is about loading.
    */
   public function drushDemo() {
-    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']);
+    $nodes = $this->entityManager->getStorage('node')->loadByProperties(['type' => 'page']);
     $rows = [];
     foreach ($nodes as $node) {
       $rows[] = [
