@@ -49,14 +49,13 @@ class ControllerTask extends ControllerBase {
    */
   public function cloneNode(AccountInterface $account, $node) {
     $node = Node::load($node);
-
-    if ($node->getType() == 'page') {
+    $type_id = $node->bundle();
+    if ($account->hasPermission("clone $type_id contents")) {
       $result = AccessResult::allowed();
     }
     else {
       $result = AccessResult::forbidden();
     }
-
     $result->addCacheableDependency($node);
 
     return $result;

@@ -52,4 +52,4 @@ venkat_exercise.controllertask:
         type: entity:node
   requirements:
     _custom_access: '\Drupal\venkat_exercise\Controller\ControllerTask::cloneNode'
-    _permission: 'controller permission'
+    # _permission: 'controller permission'
