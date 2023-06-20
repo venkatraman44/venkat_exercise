@@ -1,24 +1,15 @@
 (function ($, Drupal) {
-    Drupal.behaviors.venkatExerciseJqueryForm = {
-      attach: function (context, settings) {
-        var $sameAsPermanent = $('#edit-same-address');
-        var $temporaryAddress = $('#edit-local-address');
-        var $localAddressWrapper = $('#local-address-wrapper');
+  $(document).ready(function () {
+    var $sameAsPermanent = $('#edit-same-address');
+    var $temporaryAddress = $('#edit-local-address');
+    var $localAddressLabel = $('#local-address-wrapper label');
 
-        if ($sameAsPermanent.is(':checked')) {
-          $temporaryAddress.hide();
-          $localAddressWrapper.find('label').hide();
-        }
+    $temporaryAddress.toggle(!$sameAsPermanent.is(':checked'));
+    $localAddressLabel.toggle(!$sameAsPermanent.is(':checked'));
 
-        $sameAsPermanent.on('change', function () {
-          if ($(this).is(':checked')) {
-            $temporaryAddress.hide();
-            $localAddressWrapper.find('label').hide();
-          } else {
-            $temporaryAddress.show();
-            $localAddressWrapper.find('label').show();
-          }
-        });
-      }
-    };
-  })(jQuery, Drupal);
+    $sameAsPermanent.on('change', function () {
+      $temporaryAddress.toggle(!$(this).is(':checked'));
+      $localAddressLabel.toggle(!$(this).is(':checked'));
+    });
+  });
+})(jQuery, Drupal);
