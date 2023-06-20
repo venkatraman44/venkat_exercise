@@ -52,4 +52,11 @@ venkat_exercise.controllertask:
         type: entity:node
   requirements:
     _custom_access: '\Drupal\venkat_exercise\Controller\ControllerTask::cloneNode'
-    # _permission: 'controller permission'
+
+venkat_exercise.jquery_form: #route name
+  path: '/jqform' #path
+  defaults:
+    _form: '\Drupal\venkat_exercise\Form\JqueryForm' #class and function
+    _title: 'JqueryForm' #title
+  requirements:
+    _permission: 'access content' #permission

@@ -5,12 +5,38 @@ namespace Drupal\venkat_exercise\Form;
 // namespace.
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Connection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Extending base class.
  */
 class DropdownForm extends FormBase {
+  /**
+   * The Messenger service.
+   *
+   * @var Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * Constructs InviteByEmail .
+   *
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database service.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('database'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -102,7 +128,7 @@ class DropdownForm extends FormBase {
    * Helper function to retrieve country options.
    */
   private function getCountryOptions() {
-    $query = Database::getConnection()->select('country', 'c');
+    $query = $this->database->select('country', 'c');
     $query->fields('c', ['id', 'name']);
     $result = $query->execute();
     $options = [];
@@ -120,7 +146,7 @@ class DropdownForm extends FormBase {
   private function getstateOptions($selected_country_id) {
 
     // Fetch the states for the selected country.
-    $query = Database::getConnection()->select('state', 's');
+    $query = $this->database->select('state', 's');
     $query->fields('s', ['id', 'name']);
     $query->condition('s.country_id', $selected_country_id);
     $result = $query->execute();
@@ -137,7 +163,7 @@ class DropdownForm extends FormBase {
    * To get district by state.
    */
   public function getDistrictsByState($selected_state_id) {
-    $query = Database::getConnection()->select('district', 'd');
+    $query = $this->database->select('district', 'd');
     $query->fields('d', ['id', 'name']);
     $query->condition('d.state_id', $selected_state_id);
     $result = $query->execute();

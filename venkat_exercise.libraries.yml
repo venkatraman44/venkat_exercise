@@ -3,3 +3,5 @@ venkat_exercise_styles: #library name
   css:
     theme:
       css/venkat_exercise_styles.css: {}   #we are adding css file in libraries so it can be accessed wherever we want.
+  js:
+    js/jquery-form.js: {}
