@@ -60,3 +60,20 @@ venkat_exercise.jquery_form: #route name
     _title: 'JqueryForm' #title
   requirements:
     _permission: 'access content' #permission
+
+venkat_exercise.modal-page:
+  path: '/modal-link'
+  defaults:
+    _controller: '\Drupal\venkat_exercise\Controller\CustomModal::modalLink'
+    _title: 'Open modal page'
+  requirements:
+    _permission: 'access content'
+
+
+venkat_exercise.taskform: #route name for config form
+  path: '/task-form' #path
+  defaults:
+    _form: '\Drupal\venkat_exercise\Form\TaskForm' #class and function
+    _title: 'Custom Configuration Form' #title
+  requirements:
+    _permission: 'access content' #permission
