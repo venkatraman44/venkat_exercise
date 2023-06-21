@@ -65,13 +65,16 @@ class CustomForm extends FormBase {
     return $form;
   }
 
+  /**
+   * Function for ajax submit.
+   */
   public function ajaxSubmit() {
     $response = new AjaxResponse();
     $response->addCommand(new InvokeCommand("html", 'testing'));
     return $response;
   }
 
-   /**
+  /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
