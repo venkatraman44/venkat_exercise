@@ -9,6 +9,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Database\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
 
 /**
  * Class creation.
@@ -27,6 +29,7 @@ class CustomForm extends FormBase {
    * Build form generates form.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $form['#attached']['library'][] = "venkat_exercise/venkat_exercise_styles";
     $form['firstname'] = [
       '#type' => 'textfield',
       '#title' => 'First Name',
@@ -54,9 +57,31 @@ class CustomForm extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => 'Submit',
+      '#ajax' => [
+        'callback' => '::ajaxSubmit',
+      ],
     ];
 
     return $form;
+  }
+
+  public function ajaxSubmit() {
+    $response = new AjaxResponse();
+    $response->addCommand(new InvokeCommand("html", 'testing'));
+    return $response;
+  }
+
+   /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $email = $form_state->getValue('email');
+    if (empty($email)) {
+      $form_state->setErrorByName('email', $this->t('Email is required.'));
+    }
+    elseif (!preg_match('/^[\w\-\.]+@[\w\-\.]+\.\w+$/', $email)) {
+      $form_state->setErrorByName('email', $this->t('enter valid email'));
+    }
   }
 
   /**

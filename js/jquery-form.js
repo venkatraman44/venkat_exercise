@@ -1,15 +1,37 @@
 (function ($, Drupal) {
+  $.fn.testing = function() {
+      alert("submitted");
+      $("#custom-demo-get-user-details").submit();
+  };
+
+}(jQuery, Drupal));
+
+(function ($) {
   $(document).ready(function () {
-    var $sameAsPermanent = $('#edit-same-address');
-    var $temporaryAddress = $('#edit-local-address');
-    var $localAddressLabel = $('#local-address-wrapper label');
+      var $permanentAdd = $('#same-as-permanent');
+      var $tempAdd = $('.form-item-temporary-address');
+//on load
+      if ($permanentAdd.is(':checked')) {
+          $tempAdd.hide();
+      }
 
-    $temporaryAddress.toggle(!$sameAsPermanent.is(':checked'));
-    $localAddressLabel.toggle(!$sameAsPermanent.is(':checked'));
-
-    $sameAsPermanent.on('change', function () {
-      $temporaryAddress.toggle(!$(this).is(':checked'));
-      $localAddressLabel.toggle(!$(this).is(':checked'));
-    });
+      $permanentAdd.on('change', function () {
+      if ($(this).is(':checked')) {
+          $tempAdd.hide();
+      } else {
+          $tempAdd.show();
+      }
+      });
   });
-})(jQuery, Drupal);
+})(jQuery);
+
+(function ($, Drupal, drupalSettings) {
+  Drupal.behaviors.MyModuleBehavior = {
+      attach: function (context, settings) {
+      var testing = drupalSettings.venkat_exercise.testing;
+      alert(testing)
+      $('body').css('background', testing);
+      }
+  };
+  // Drupal.behaviors.MyModuleBehavior.attach(document, Drupal.settings);
+})(jQuery, Drupal, drupalSettings);

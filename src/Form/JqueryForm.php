@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Extending base class.
+ * Implements the example form.
  */
 class JqueryForm extends FormBase {
 
@@ -21,46 +21,29 @@ class JqueryForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['#attached']['library'][] = 'venkat_exercise/venkat_exercise_styles';
+    $form['#attached']['library'][] = "venkat_exercise/venkat_exercise_styles";
 
     $form['permanent_address'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Permanent Address'),
-      '#required' => TRUE,
+      '#attributes' => ['id' => 'permanent-address'],
     ];
 
-    $form['same_address'] = [
+    $form['same_as_permanent'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Same as Permanent Address'),
-      '#default_value' => TRUE,
-      '#attributes' => ['class' => ['same-address-checkbox']],
-      '#attached' => [
-        'library' => ['venkat_exercise/jquery-form'],
-      ],
+      '#title' => $this->t('Same as Permanent'),
+      '#attributes' => ['id' => 'same-as-permanent'],
     ];
 
-    $form['local_address'] = [
+    $form['temporary_address'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Local Address'),
-      '#required' => FALSE,
-      '#attributes' => [
-        'class' => ['temporary-address'],
-        'style' => 'display:none',
-      ],
-      '#prefix' => '<div id="local-address-wrapper">',
-      '#suffix' => '</div>',
-      '#attached' => [
-        'library' => ['venkat_exercise/jquery-form'],
-      ],
+      '#title' => $this->t('Temporary Address'),
+      '#attributes' => ['id' => 'temporary-address'],
     ];
-
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Submit'),
+      '#value' => 'submit',
     ];
-
-    // Hide the title of the local_address field if the checkbox is checked.
-    $form['#attached']['drupalSettings']['venkat_exercise']['hideLocalAddressTitle'] = TRUE;
 
     return $form;
   }
@@ -69,7 +52,7 @@ class JqueryForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Handle form submission.
+
   }
 
 }
