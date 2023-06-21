@@ -82,7 +82,7 @@ class CustomForm extends FormBase {
     if (empty($email)) {
       $form_state->setErrorByName('email', $this->t('Email is required.'));
     }
-    elseif (!preg_match('/^[\w\-\.]+@[\w\-\.]+\.\w+$/', $email)) {
+    elseif (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
       $form_state->setErrorByName('email', $this->t('enter valid email'));
     }
   }
