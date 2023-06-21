@@ -1,7 +1,7 @@
 (function ($, Drupal) {
   $.fn.testing = function() {
       alert("submitted");
-      $("#custom-demo-get-user-details").submit();
+      $("#custom-form-get-user-details").submit();
   };
 
 }(jQuery, Drupal));
