@@ -41,6 +41,8 @@ function venkat_exercise_user_login($account) {
  * Implements hook_page_attachments_alter().
  */
 function venkat_exercise_page_attachments_alter(array &$attachments) {
+  $attachments['#attached']['library'][] = 'venkat_exercise/venkat_exercise_styles';
+  $attachments['#attached']['drupalSettings']['venkat_exercise']['testing'] = "testings";
   // Calling the service.
   $route_match = \Drupal::routeMatch();
   // Getting the route name of the particular page.
@@ -105,6 +107,13 @@ function venkat_exercise_entity_insert(EntityInterface $entity) {
     // drupal_set_message(t('Your message has been sent.'));.
   }
 
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function venkat_exercise_entity_presave(EntityInterface $entity) {
+  $entity->set("title", "presaving the values");
 }
 
 /**

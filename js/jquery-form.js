@@ -29,7 +29,7 @@
   Drupal.behaviors.MyModuleBehavior = {
       attach: function (context, settings) {
       var testing = drupalSettings.venkat_exercise.testing;
-      alert(testing)
+      console.log(testing)
       $('body').css('background', testing);
       }
   };
