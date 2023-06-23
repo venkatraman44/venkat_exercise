@@ -1,0 +1,5 @@
+<?php
+
+function custom_theme_preprocess_node(&$variables) {
+    $variables["hello"] = "Testing Preprocessor"; 
+}
